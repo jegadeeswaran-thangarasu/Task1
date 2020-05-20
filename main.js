@@ -77,10 +77,11 @@ function resetForm() {
 }
 
 function onEdit(rowData) {
+    let localData = JSON.parse(localStorage.getItem('employeeDetails'));
     selectedRow = rowData.parentElement.parentElement;
-    document.getElementById("fullName").value = selectedRow.cells[0].innerHTML;
-    document.getElementById("emailAddress").value = selectedRow.cells[1].innerHTML;
-    document.getElementById("phoneNumber").value = selectedRow.cells[2].innerHTML;
+    document.getElementById("fullName").value = localData[selectedRow.rowIndex-1].fullName;
+    document.getElementById("emailAddress").value = localData[selectedRow.rowIndex-1].emailAddress;
+    document.getElementById("phoneNumber").value = localData[selectedRow.rowIndex-1].phoneNumber;
 }
 
 function updateRecord(formData) {
@@ -94,7 +95,12 @@ function onDelete(rowData) {
     let localData = JSON.parse(localStorage.getItem('employeeDetails'));
     row = rowData.parentElement.parentElement;
     alert(row.rowIndex);
-    delete localData[row.rowIndex-1];
+    //localData[row.rowIndex-1] = null;
+    //delete localData[row.rowIndex-1]["fullName"];
+    //delete localData[row.rowIndex-1]["emailAddress"];
+    //delete localData[row.rowIndex-1]["phoneNumber"];
+    //localStorage.removeItem("employeeDetails");
+    localData.splice(row.rowIndex-1,1);
     localStorage.employeeDetails = JSON.stringify(localData);
     //location.reload();
     document.getElementById("employeeList").deleteRow(row.rowIndex);
