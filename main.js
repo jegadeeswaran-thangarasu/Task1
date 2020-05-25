@@ -1,7 +1,6 @@
 let selectedRow = null;
 let initialData = false;
 
-
 function onFormSubmit() {
     let formData = readFormData();
     if(!selectedRow){
@@ -85,9 +84,15 @@ function onEdit(rowData) {
 }
 
 function updateRecord(formData) {
+    let localData = JSON.parse(localStorage.getItem('employeeDetails'));
+    let rowInd = selectedRow.rowIndex;
+    localData[rowInd-1].fullName = formData.fullName;
+    localData[rowInd-1].emailAddress = formData.emailAddress;
+    localData[rowInd-1].phoneNumber = formData.emailAddress;
     selectedRow.cells[0].innerHTML = formData.fullName;
     selectedRow.cells[1].innerHTML = formData.emailAddress;
     selectedRow.cells[2].innerHTML = formData.phoneNumber;
+    localStorage.employeeDetails = JSON.stringify(localData);
     selectedRow = null;
 }
 
