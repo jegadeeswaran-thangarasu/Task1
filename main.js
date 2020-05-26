@@ -1,8 +1,11 @@
 let selectedRow = null;
-let initialData = false;
+let initialData = false;    
 
 function onFormSubmit() {
     let formData = readFormData();
+    if(!isValidData(formData)) {
+        return ;
+    }
     if(!selectedRow){
         insertNewRecord(formData);
     } else {
@@ -110,4 +113,27 @@ function onDelete(rowData) {
     //location.reload();
     document.getElementById("employeeList").deleteRow(row.rowIndex);
     resetForm();
+}
+
+function isValidData(formData) {
+    if(!formData.fullName) {
+        alert('Please enter a name.');
+        return false;
+    }
+    if(!formData.emailAddress) {
+        alert('Please enter a email.');
+        return false;
+    }
+    else {
+        let emailRegx = /^(([^<>()\\[\]\\.,;:\s@"]+(\.[^<>()\\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        if(!emailRegx.test(formData.emailAddress)) {
+            alert('Please enter a valid email.');
+            return false;
+        }
+    }
+    if(!formData.phoneNumber) {
+        alert('Please enter a phone number.');
+        return false;
+    } 
+    return true;
 }

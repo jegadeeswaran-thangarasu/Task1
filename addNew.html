@@ -1,16 +1,30 @@
 <!DOCTYPE html>
 <html>
-    <script src = "main.js"></script>
+    
     <head>
-        Add New Employee
+        <title>addNew</title>
+        <label class="form-action-buttons">Add New Employee</label>
+        <link rel="stylesheet"  type="text/css" href="styles.css" >
     </head>
     
     <body>
-        <form><br>
-            First Name: <input type = "text" id = "firstName" /> <br><br>
-            Email: <input type = "text" id = "email" /><br><br>
-            phone Number : <input type = "text" id = "phoneNumber" /> <br><br>
-            <input type="submit" value="Submit" onclick="formData()"/><br>
+        <form onsubmit="event.preventDefault();onFormSubmit()" autocomplete="off">
+            <div>
+                <label>Name</label>
+                <input type = "text" name = "fullName" id="fullName">
+            </div>
+            <div>
+                <label>Email Address</label>
+                <input type = "text" name = "emailAddress" id="emailAddress">
+            </div>
+            <div>
+                <label>Phone Number</label>
+                <input type = "text" name = "phoneNumber" id="phoneNumber">
+            </div>
+            <div class="form-action-buttons">
+                <input type = "submit" value = "Submit">
+            </div>
+            <script src = "main.js"></script>
         </form>
     </body>
 </html>
